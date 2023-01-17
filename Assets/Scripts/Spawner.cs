@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private GameTimer _timer;
     [SerializeField] private Container _container;
+    [SerializeField] private Tower _tower;
 
     private bool _isWaveReady = false;
     private Wave _currentWave;
@@ -58,7 +59,7 @@ public class Spawner : MonoBehaviour
         Enemy enemy = Instantiate(_currentWave.Template, _spawnPoints[_templateSpawnPoint].position, Quaternion.identity, _containerParent).GetComponent<Enemy>();
         _templateSpawnPoint++;
         _container.enabled = true;
-        enemy.Init(_player);
+        enemy.Init(_player, this, _tower);
         enemy.Dying += OnEnemyDying;
     }
 
@@ -100,4 +101,3 @@ public class Wave
     public float Delay;
     public int Count;
 }
-

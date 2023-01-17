@@ -8,6 +8,8 @@ public class BuildingsGrid : MonoBehaviour
     [SerializeField] private Vector2Int _startPositionGrid;
     [SerializeField] private Player _player;
     [SerializeField] private GameTimer _timer;
+    [SerializeField] private Container _container;
+    [SerializeField] private Spawner _spawner;
 
     private Creature[,] _grid;
     private Creature _takenCreature;
@@ -76,6 +78,7 @@ public class BuildingsGrid : MonoBehaviour
                 Destroy(_takenCreature.gameObject);
 
             _takenCreature = Instantiate(buildingPrefab);
+            _takenCreature.Init(_container, _spawner);
         }
     }
 

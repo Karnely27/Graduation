@@ -19,7 +19,7 @@ public class DistanceTransition : Transition
         }
         if (Target == null)
         {
-            if (Vector3.Distance(transform.position, Core.transform.position) < _transitionRange)
+            if (Vector3.Distance(transform.position, Tower.transform.position) < _transitionRange)
                 NeedTransit = true;
         }
     }

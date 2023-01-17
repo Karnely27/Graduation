@@ -10,14 +10,14 @@ public class EnemyStateMachine : MonoBehaviour
     private List<Creature> _creatures;
     private State _currentState;
     private Enemy _enemy;
-    private Tower _core;
+    private Tower _tower;
 
     private void Start()
     {
-        _spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();
-        _core = GameObject.FindWithTag("Core").GetComponent<Tower>();
         _enemy = GetComponent<Enemy>();
         _creatures = _enemy.Creatures;
+        _spawner = _enemy.Spawner;
+        _tower = _enemy.Tower;
         Reset(_firstState);
     }
 
@@ -43,7 +43,7 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (_currentState != null)
         {
-            _currentState.Enter(_creatures, _spawner, _core, _enemy);
+            _currentState.Enter(_creatures, _spawner, _tower, _enemy);
         }
     }
 
@@ -52,6 +52,6 @@ public class EnemyStateMachine : MonoBehaviour
         _currentState = startState;
 
         if (_currentState != null)
-            _currentState.Enter(_creatures, _spawner, _core, _enemy);
+            _currentState.Enter(_creatures, _spawner, _tower, _enemy);
     }
 }

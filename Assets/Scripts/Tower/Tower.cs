@@ -89,7 +89,7 @@ public class Tower : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            //gameOver
+            Debug.Log("GameOver");
         }
         HealthChanged?.Invoke(_currentHealth);
     }
@@ -104,6 +104,5 @@ public class Tower : MonoBehaviour
             HealthChanged?.Invoke(_currentHealth);
             _damage += _levelUpDamage;
         }
-
     }
 }

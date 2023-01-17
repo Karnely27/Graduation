@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class MoveStateCreature : StateCreature
 {
+    private const string _walkForward = "Walk Forward";
+
     private void OnEnable()
     {
-        Animator.SetBool("Walk Forward", true);
+        Animator.SetBool(_walkForward, true);
     }
 
     private void OnDisable()
     {
-        Animator.SetBool("Walk Forward", false);
+        Animator.SetBool(_walkForward, false);
     }
 
     private void Update()

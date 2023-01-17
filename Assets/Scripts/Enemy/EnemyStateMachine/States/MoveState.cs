@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class MoveState : State
 {
+    private const string _walkForward = "Walk Forward";
+
     private void OnEnable()
     {
-        Animator.SetBool("Walk Forward", true);
+        Animator.SetBool(_walkForward, true);
     }
 
     private void OnDisable()
     {
-        Animator.SetBool("Walk Forward", false);
+        Animator.SetBool(_walkForward, false);
     }
 
     private void Update()
@@ -21,8 +23,8 @@ public class MoveState : State
         }
         if (Target == null)
         {
-            transform.LookAt(Core.transform);
-            transform.position = Vector3.MoveTowards(transform.position, Core.transform.position, Time.deltaTime * Enemy.Speed);
+            transform.LookAt(Tower.transform);
+            transform.position = Vector3.MoveTowards(transform.position, Tower.transform.position, Time.deltaTime * Enemy.Speed);
         }
     }
 }

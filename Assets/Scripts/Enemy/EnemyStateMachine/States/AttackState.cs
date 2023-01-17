@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackState : State
 {
+    private const string _stabAttack = "Stab Attack";
     private float _lastAttackTime;
 
     private void Update()
@@ -13,7 +12,7 @@ public class AttackState : State
             if (_lastAttackTime <= 0)
             {
                 Attack(Target);
-                Animator.Play("Stab Attack");
+                Animator.Play(_stabAttack);
                 _lastAttackTime = Enemy.Delay;
             }
             _lastAttackTime -= Time.deltaTime;
@@ -22,8 +21,8 @@ public class AttackState : State
         {
             if (_lastAttackTime <= 0)
             {
-                AttackCore(Core);
-                Animator.Play("Stab Attack");
+                AttackTower(Tower);
+                Animator.Play(_stabAttack);
                 _lastAttackTime = Enemy.Delay;
             }
             _lastAttackTime -= Time.deltaTime;
@@ -35,8 +34,8 @@ public class AttackState : State
         target.ApplyDamage(Enemy.Damage);
     }
 
-    private void AttackCore(Tower core)
+    private void AttackTower(Tower tower)
     {
-        core.ApplyDamage(Enemy.Damage);
+        tower.ApplyDamage(Enemy.Damage);
     }
 }

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -16,7 +14,7 @@ public abstract class State : MonoBehaviour
 
     protected Creature Target { get; set; }
 
-    protected Tower Core { get; set; }
+    protected Tower Tower { get; set; }
 
     protected Enemy Enemy { get; set; }
 
@@ -25,7 +23,7 @@ public abstract class State : MonoBehaviour
         Animator = GetComponent<Animator>();
     }
 
-    public void Enter(List<Creature> targets, Spawner spawner, Tower core, Enemy enemy)
+    public void Enter(List<Creature> targets, Spawner spawner, Tower tower, Enemy enemy)
     {
         if (enabled == false)
         {
@@ -33,13 +31,13 @@ public abstract class State : MonoBehaviour
             Spawner = spawner;
             enabled = true;
             Target = GetNearTarget();
-            Core = core;
+            Tower = tower;
             Enemy = enemy;
 
             foreach (var transition in _transitions)
             {
                 transition.enabled = true;
-                transition.Init(targets, spawner, Target, core, enemy);
+                transition.Init(targets, spawner, Target, tower, enemy);
             }
         }
     }

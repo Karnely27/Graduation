@@ -1,25 +1,27 @@
+using System.Collections;
 using UnityEngine;
 
 public class AttackStateCreature : StateCreature
 {
-    private float _lastAttackTime;
+    private const string _stabAttack = "Stab Attack";
 
-    private void Update()
+    private void OnEnable()
     {
-        if (Target != null)
-        {
-            if (_lastAttackTime <= 0)
-            {
-                Attack(Target);
-                Animator.Play("Stab Attack");
-                _lastAttackTime = Creature.Delay;
-            }
-            _lastAttackTime -= Time.deltaTime;
-        }
+        StartCoroutine(Attack(Target));
     }
 
-    private void Attack(Enemy target)
+    private void OnDisable()
     {
-        target.ApplyDamage(Creature.Damage);
+        StopCoroutine(Attack(Target));
+    }
+
+    private IEnumerator Attack(Enemy target)
+    {
+        while (Target != null)
+        {
+            target.ApplyDamage(Creature.Damage);
+            Animator.Play(_stabAttack);
+            yield return new WaitForSeconds(Creature.Delay);
+        }
     }
 }

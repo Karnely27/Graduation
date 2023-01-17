@@ -21,6 +21,8 @@ public class Creature : MonoBehaviour
     private Vector3 _startPosotion;
     private Quaternion _startRotation;
     private bool _isAlive = true;
+    private Container _container;
+    private Spawner _spawner;
 
     public Vector2Int Size => _sizeGizmos;
 
@@ -42,11 +44,15 @@ public class Creature : MonoBehaviour
 
     public bool IsAlive => _isAlive;
 
+    public Container Container => _container;
+
+    public Spawner Spawner => _spawner;
+
     public event UnityAction<Creature> DyingCreature;
 
     private void Start()
     {
-        _currentHealth = _maxHealth; 
+        _currentHealth = _maxHealth;
         _slider.maxValue = _maxHealth;
         _slider.value = _currentHealth;
     }
@@ -61,6 +67,12 @@ public class Creature : MonoBehaviour
                 Gizmos.DrawCube(transform.position + new Vector3(j - 0.5f, 0, i - 0.5f), new Vector3(1f, 0.1f, 1f));
             }
         }
+    }
+
+    public void Init(Container container, Spawner spawner)
+    {
+        _container = container;
+        _spawner = spawner;
     }
 
     public void ApplyDamage(int damage)

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Transition : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public abstract class Transition : MonoBehaviour
 
     protected Spawner Spawner { get; private set; }
 
-    protected Tower Core { get; private set; }
+    protected Tower Tower { get; private set; }
 
     protected Enemy Enemy { get; private set; }
 
@@ -26,14 +24,12 @@ public abstract class Transition : MonoBehaviour
         NeedTransit = false;
     }
 
-    public void Init(List<Creature> targets, Spawner spawner, Creature target, Tower core, Enemy enemy)
+    public void Init(List<Creature> targets, Spawner spawner, Creature target, Tower tower, Enemy enemy)
     {
         Targets = targets;
         Spawner = spawner;
         Target = target;
-        Core = core;
+        Tower = tower;
         Enemy = enemy;
     }
 }
-
-

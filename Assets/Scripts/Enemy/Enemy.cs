@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     private int _currentHealth;
     private bool _isAlive = true;
     private List<Creature> _creaturesPlayer;
+    private Spawner _spawner;
+    private Tower _tower;
 
     public List<Creature> Creatures => _creaturesPlayer;
 
@@ -34,6 +36,10 @@ public class Enemy : MonoBehaviour
 
     public int Reward => _reward;
 
+    public Spawner Spawner => _spawner;
+
+    public Tower Tower => _tower;
+
     public event UnityAction<Enemy> Dying;
 
     private void Start()
@@ -43,9 +49,11 @@ public class Enemy : MonoBehaviour
         _slider.value = _currentHealth;
     }
 
-    public void Init(Player player)
+    public void Init(Player player, Spawner spawner, Tower tower)
     {
         _creaturesPlayer = player.CreaturesPlayer;
+        _spawner = spawner;
+        _tower = tower;
     }
 
     public void ApplyDamage(int damage)

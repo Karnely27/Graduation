@@ -12,9 +12,9 @@ public class StateMachineCreature : MonoBehaviour
 
     private void Start()
     {
-        _spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();
-        _container = GameObject.FindWithTag("Container").GetComponent<Container>();
         _creature = GetComponent<Creature>();
+        _container = _creature.Container;
+        _spawner = _creature.Spawner;
         Reset(_firstState);
     }
 
@@ -47,6 +47,4 @@ public class StateMachineCreature : MonoBehaviour
         if (_currentState != null)
             _currentState.Enter(_container, _spawner, _creature);
     }
-
-
 }
